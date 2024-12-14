@@ -1,0 +1,6 @@
+description: |
+    STMicroelectronics CR95HF NFC Initiator / HF Reader
+
+compatible: "st,cr95hf"
+
+include: spi-device.yaml

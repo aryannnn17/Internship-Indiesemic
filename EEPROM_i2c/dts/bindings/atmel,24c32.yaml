@@ -1,0 +1,6 @@
+description: |
+    Atmel 24c32 EEPROM
+
+compatible: "atmel,24c32"
+
+include: i2c-device.yaml

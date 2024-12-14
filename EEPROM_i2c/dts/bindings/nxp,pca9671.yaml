@@ -1,0 +1,6 @@
+description: |
+    NXP Semiconductors PCA9671 IO Expander
+
+compatible: "nxp,pca9671"
+
+include: i2c-device.yaml
