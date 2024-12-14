@@ -1,0 +1,160 @@
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+/ {
+    chosen {
+        zephyr,console = &uart0;
+        zephyr,shell-uart = &uart0;
+        zephyr,uart-mcumgr = &uart0;
+
+    };
+
+    gpio {
+        compatible = "gpio-keys";
+        ROW0_4x4: ROW0_4x4 {
+            gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+        };
+        ROW1_4x4: ROW1_4x4 {
+            gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+        };
+        ROW2_4x4: ROW2_4x4 {
+            gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
+        };
+        ROW3_4x4: ROW3_4x4 {
+            gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+        };
+        COL0_4x4: COL0_4x4{
+            gpios = <&gpio1 5 GPIO_ACTIVE_HIGH>;
+        };
+        COL1_4x4: COL1_4x4{
+            gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
+        };
+        COL2_4x4: COL2_4x4{
+            gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+        };
+        COL3_4x4: COL3_4x4{
+            gpios = <&gpio1 8 GPIO_ACTIVE_HIGH>;
+        };
+
+        COL0_4x1: COL0_4x1{
+            gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>;
+        };
+
+        COL1_4x1: COL1_4x1{
+            gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>;
+        };
+
+        COL2_4x1: COL2_4x1{
+            gpios = <&gpio1 12 GPIO_ACTIVE_HIGH>;
+        };
+
+        COL3_4x1: COL3_4x1{
+            gpios = <&gpio1 13 GPIO_ACTIVE_HIGH>;
+        };
+
+
+
+    };
+
+    buttons {
+		compatible = "gpio-keys";
+		button0: button_0 {
+			gpios = <&gpio0 11 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push button switch 0";
+			zephyr,code = <INPUT_KEY_0>;
+		};
+		button1: button_1 {
+			gpios = <&gpio0 12 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push button switch 1";
+			zephyr,code = <INPUT_KEY_1>;
+		};
+		button2: button_2 {
+			gpios = <&gpio0 24 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push button switch 2";
+			zephyr,code = <INPUT_KEY_2>;
+		};
+		button3: button_3 {
+			gpios = <&gpio0 25 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+			label = "Push button switch 3";
+			zephyr,code = <INPUT_KEY_3>;
+		};
+	};
+
+    aliases {
+        kpd4x4-row0 = &ROW0_4x4;
+        kpd4x4-row1 = &ROW1_4x4;
+        kpd4x4-row2 = &ROW2_4x4;
+        kpd4x4-row3 = &ROW3_4x4;
+        kpd4x4-col0 = &COL0_4x4;
+        kpd4x4-col1 = &COL1_4x4;
+        kpd4x4-col2 = &COL2_4x4;
+        kpd4x4-col3 = &COL3_4x4;
+        kpd4x1-col0 = &COL0_4x1;
+        kpd4x1-col1 = &COL1_4x1;
+        kpd4x1-col2 = &COL2_4x1;
+        kpd4x1-col3 = &COL3_4x1;
+        sw0 = &button0;
+		sw1 = &button1;
+		sw2 = &button2;
+		sw3 = &button3;
+    };
+
+};
+
+&gpio0 {
+    status = "okay";
+};
+
+&gpio1 {
+    status = "okay";
+};
+
+&uart0 {
+    status = "okay";
+    current-speed = <115200>;
+    pinctrl-0 = <&uart0_default>;
+    pinctrl-names = "default";
+};
+
+&pinctrl {
+    uart0_default: uart0_default {
+        group1 {
+            psels = <NRF_PSEL(UART_TX, 0, 6)>, <NRF_PSEL(UART_RX, 0, 8)>;
+        };
+    };
+};
+
+
+&i2c0 {
+    compatible = "nordic,nrf-twim";
+    status = "okay";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-names = "default";
+};
+
+
+&pinctrl {
+    compatible = "nordic,nrf-pinctrl";
+    i2c0_default: i2c0_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 26)>, <NRF_PSEL(TWIM_SCL, 0, 27)>;
+        };
+    };
+};
+
+&i2c1 {
+    compatible = "nordic,nrf-twim";
+    status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
+};
+
+
+&pinctrl {
+    compatible = "nordic,nrf-pinctrl";
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 23)>, <NRF_PSEL(TWIM_SCL, 0, 24)>;
+            bias-pull-up;
+        };
+    };
+};
