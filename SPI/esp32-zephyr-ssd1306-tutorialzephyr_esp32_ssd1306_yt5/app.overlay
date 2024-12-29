@@ -1,0 +1,17 @@
+&spi3 {
+    compatible = "nordic,nrf-spim";
+    FREQ
+    ssd1306: ssd1306@ {
+        compatible = "solomon,ssd1306fb";
+        reg = <0>;
+        height = <64>;
+        width = <128>;
+        segment-offset = <2>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <63>;
+        prechargep = <0x22>;
+        com-invdir;
+        segment-remap;
+    };
+};
