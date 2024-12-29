@@ -1,0 +1,44 @@
+&i2c0 {
+    status = "okay";
+    compatible = "nordic,nrf-twim";
+    label = "I2C_0";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
+    clock-frequency = <I2C_BITRATE_FAST>;
+};
+&i2c0_default {
+    group1 {
+        bias-pull-up;
+    };
+};
+
+
+
+/* 
+&pinctrl {
+    i2c1_default: i2c1_default{
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 1, 5)>,
+                    <NRF_PSEL(TWIM_SCL, 1, 4)>;
+        };
+    };
+
+    i2c1_sleep: i2c1_sleep{
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 1, 5)>,
+                    <NRF_PSEL(TWIM_SCL, 1, 4)>;
+            low-power-enable;
+        };
+    };
+
+}; */
+
+
+&spi1 {
+	status = "disabled";
+};
+
+&i2c1 {
+	status = "disabled";
+};
